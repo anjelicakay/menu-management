@@ -1,0 +1,41 @@
+@import '../classes.scss';
+
+.menu-item-card {
+  background-color: $white;
+  border: 1px $black solid;
+  border-radius: 10px;
+  box-sizing: border-box;
+  display: flex;
+  height: 150px;
+  padding: 10px 20px;
+  width: 500px;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 250px;
+  }
+  
+  &__description {
+    @include body-reg;
+
+    &.gray {
+      color: $slate-gray;
+    }
+
+    &.bold {
+      font-weight: 700;
+    }
+  }
+
+  &__title {
+    @include header-reg;
+  }
+  
+  &__image {
+    height: 100%;
+    width: 125px;
+  }
+}
