@@ -1,0 +1,21 @@
+@import './tokens';
+
+@mixin body-reg() {
+  color: $black;
+  font-family: $font-family;
+  font-size: $font-size-2;
+}
+
+@mixin header-reg() {
+  color: $black;
+  font-family: $font-family;
+  font-size: $font-size-4;
+  font-weight: 700;
+}
+
+@mixin header-large() {
+  color: $black;
+  font-family: $font-family;
+  font-size: $font-size-5;
+  font-weight: 700;
+}
