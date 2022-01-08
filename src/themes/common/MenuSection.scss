@@ -1,0 +1,14 @@
+@import '../classes.scss';
+
+.menu-section {
+  &__card-container {
+    margin-bottom: 20px;
+  }
+
+  &__header {
+    @include header-large;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    text-align: center;
+  }
+}
