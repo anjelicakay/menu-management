@@ -1,0 +1,62 @@
+@import '../classes.scss';
+
+.menu-item-card {
+  background-color: $white;
+  border: 1px $black solid;
+  border-radius: 10px;
+  box-sizing: border-box;
+  display: flex;
+  height: 150px;
+  padding: 10px 20px;
+  width: 100%;
+
+  @media only screen and (min-width: $desktop) {
+    width: 550px;
+  }
+
+  &__left-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    padding-right: 10px;
+    flex: 1;
+
+    @media only screen and (min-width: $desktop) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  }
+  
+  &__description {
+    @include body-reg;
+
+    &.gray {
+      color: $slate-gray;
+    }
+
+    &.bold {
+      font-weight: 700;
+    }
+  }
+
+  &__right-container {
+    width: 30px;
+
+    @media only screen and (min-width: $desktop) {
+      width: 50px;
+    }
+  }
+
+  &__title {
+    @include header-reg;
+  }
+  
+  &__image {
+    height: 100%;
+    width: 100px;
+
+    @media only screen and (min-width: $desktop) {
+      width: 125px;
+    }
+  }
+}
