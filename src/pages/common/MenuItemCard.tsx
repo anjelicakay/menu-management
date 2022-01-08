@@ -15,11 +15,11 @@ const MenuItemCard = (props: MenuItemCardProps) => {
   return (
     <div className='menu-item-card'>
       <img alt={title} className='menu-item-card__image' src={require("../../assets/images/" + image)} />
-      <div className='menu-item-card__container'>
+      <div className='menu-item-card__left-container'>
         <h1 className='menu-item-card__title'>{title}</h1>
         <p className='menu-item-card__description gray'>{description}</p>
       </div>
-      <div>
+      <div className='menu-item-card__right-container'>
         <p className='menu-item-card__description bold'>${price}</p>
       </div>
     </div>
