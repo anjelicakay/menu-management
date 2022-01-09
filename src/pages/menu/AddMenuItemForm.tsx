@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, Form, Formik } from 'formik';
 
 import '../../themes/menu/AddMenuItemForm.scss';
-import { menuItem } from './Menu';
+import { menuItem } from '../../utils/constants';
 
 interface AddMenuItemFormProps {
   onSubmit: (category: "appetizers" | "pasta" | "dessert", values: menuItem) => void;
