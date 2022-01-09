@@ -1,11 +1,18 @@
 @import '../classes.scss';
 @import '../tokens.scss';
 
-.menu {
-  background-color: $off-white;
-  padding: 20px;
+.remove-menu-item {
+  &__message {
+    @include body-reg;
+    margin-bottom: 10px;
+  }
 
-  &__add-button {
+  &__button-container {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  &__button {
     @include body-reg;
     align-items: center;
     border: none;
@@ -13,10 +20,10 @@
     background-color: $slate-gray;
     cursor: pointer;
     display: flex;
-    height: 30px;
+    height: 40px;
     justify-content: center;
     margin-top: 10px;
     padding: 5px;
-    width: 100px;
+    width: 80px;
   }
 }
