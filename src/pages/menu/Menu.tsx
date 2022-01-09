@@ -52,6 +52,8 @@ const Menu = () => {
   };
 
   const addMenuItem = (category: "appetizers" | "pasta" | "dessert", item: menuItem) => {
+    item.image = "bruschetta.jpeg"; // having issues with google images - setting default value for now
+  
     setMenuItems({
       ...menuItems,
       [category]: [...menuItems[category], item],
