@@ -1,6 +1,22 @@
+@import '../classes.scss';
 @import '../tokens.scss';
 
 .menu {
   background-color: $off-white;
   padding: 20px;
+
+  &__add-button {
+    @include body-reg;
+    align-items: center;
+    border: none;
+    border-radius: 5px;
+    background-color: $slate-gray;
+    cursor: pointer;
+    display: flex;
+    height: 30px;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 5px;
+    width: 100px;
+  }
 }

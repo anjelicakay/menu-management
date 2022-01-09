@@ -1,0 +1,52 @@
+@import '../classes.scss';
+@import '../tokens.scss';
+
+.add-menu-item-form {
+  width: 500px;
+
+  &__header {
+    @include header-large;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    @include body-reg;
+    margin-bottom: 3px;
+  }
+
+  &__field {
+    @include body-reg;
+    margin-bottom: 10px;
+  }
+
+  &__file-upload {
+    @include body-reg;
+    margin-bottom: 10px;
+  }
+
+  &__button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  button {
+    @include body-reg;
+    align-items: center;
+    border: none;
+    border-radius: 5px;
+    background-color: $slate-gray;
+    cursor: pointer;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 5px;
+    width: 80px;
+  }
+}
