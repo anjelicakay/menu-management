@@ -9,9 +9,13 @@
   padding: 20px;
   position: fixed;
   top: 50%;
-  width: 700px;
+  width: 100%;
   transform: translate(-50%, -50%);
   z-index: 1;
+
+  @media only screen and (min-width: $desktop) {
+    width: 700px;
+  }
 
   &__container {
     display: flex;
