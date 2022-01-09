@@ -39,6 +39,20 @@
     }
   }
 
+  &__remove-button {
+    @include body-reg;  
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    color: $red;
+    cursor: pointer;
+    display: flex;
+    height: 20px;
+    margin-top: 10px;
+    padding: 0;
+    width: 43px;
+  }
+
   &__right-container {
     width: 30px;
 
