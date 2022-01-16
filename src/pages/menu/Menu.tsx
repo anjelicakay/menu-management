@@ -25,8 +25,11 @@ const Menu = () => {
     setIsAddModalOpen(false);
   };
 
-  const addMenuItem = (item: menuItem) => {  
-    setMenuItems([...menuItems, item]);
+  const addMenuItem = (item: menuItem) => {
+    const id = menuItems.length + 1;
+    const newItem = {...item, id: id};
+    console.log(newItem)
+    setMenuItems([...menuItems, newItem]);
 
     handleOnCloseClick();
   }
