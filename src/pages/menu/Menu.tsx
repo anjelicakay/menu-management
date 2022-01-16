@@ -86,7 +86,7 @@ const Menu = () => {
         </Modal>
       }
       {isRemoveModalOpen &&
-        <Modal onClose={handleCancelClick}>
+        <Modal onClose={handleCancelClick} small>
           <RemoveConfirmation
             onCancelClick={handleCancelClick}
             onRemoveClick={removeMenuItem}

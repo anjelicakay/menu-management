@@ -35,6 +35,11 @@
     outline: none;
     width: 30px;
   }
+
+  &.small {
+    height: 200px;
+    width: 400px;
+  }
 }
 
 .dimmer {
