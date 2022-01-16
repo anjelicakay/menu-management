@@ -4,7 +4,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 import '../../themes/common/Modal.scss';
 
-interface ModalProps {
+export interface ModalProps {
   children: React.ReactNode;
   onClose: () => void;
 }

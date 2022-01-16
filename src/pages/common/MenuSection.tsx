@@ -4,7 +4,7 @@ import '../../themes/common/MenuSection.scss';
 import { menuItem } from '../../utils/constants';
 import MenuItemCard from './MenuItemCard';
 
-interface MenuSectionProps {
+export interface MenuSectionProps {
   category: "appetizers" | "pasta" | "dessert";
   menu: menuItem[];
   onRemoveClick: (category: "appetizers" | "pasta" | "dessert", index: number) => void;

@@ -4,7 +4,7 @@ import { Field, Form, Formik } from 'formik';
 import '../../themes/menu/AddMenuItemForm.scss';
 import { menuItem } from '../../utils/constants';
 
-interface AddMenuItemFormProps {
+export interface AddMenuItemFormProps {
   onSubmit: (category: "appetizers" | "pasta" | "dessert", values: menuItem) => void;
 }
 
@@ -25,7 +25,7 @@ const AddMenuItemForm = (props: AddMenuItemFormProps) => {
   }
 
   return (
-    <div className='add-menu-item-form'>
+    <div className='add-menu-item-form' data-testid="add-new-item-form">
       <h1 className='add-menu-item-form__header'>Add New Item</h1>
       <Formik
         initialValues={initialValues}
@@ -37,6 +37,7 @@ const AddMenuItemForm = (props: AddMenuItemFormProps) => {
             <Field
               as="select"
               className="add-menu-item-form__field"
+              data-testid="item-input-category"
               name="category"
             >
               <option value=""></option>
@@ -49,6 +50,7 @@ const AddMenuItemForm = (props: AddMenuItemFormProps) => {
             <label>Title</label>
             <Field
               className="add-menu-item-form__field"
+              data-testid="item-input-title"
               name="title"
               type="text"
             />
@@ -57,6 +59,7 @@ const AddMenuItemForm = (props: AddMenuItemFormProps) => {
             <label>Description</label>
             <Field
               className="add-menu-item-form__field"
+              data-testid="item-input-description"
               name="description"
               type="text"
             />
@@ -65,6 +68,7 @@ const AddMenuItemForm = (props: AddMenuItemFormProps) => {
             <label>Price</label>
             <Field
               className="add-menu-item-form__field"
+              data-testid="item-input-price"
               name="price"
               type="number"
             />
@@ -73,6 +77,7 @@ const AddMenuItemForm = (props: AddMenuItemFormProps) => {
             <label>Image</label>
             <Field
               className="add-menu-item-form__file-upload"
+              data-testid="item-input-image"
               name="image"
               type="text"
             />
