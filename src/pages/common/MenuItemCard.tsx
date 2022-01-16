@@ -1,30 +1,50 @@
 import React from 'react';
 
 import '../../themes/common/MenuItemCard.scss';
+import InlineEdit from './InlineEdit';
 
 export interface MenuItemCardProps {
-  category: "appetizers" | "pasta" | "dessert";
   description: string;
   image: string;
-  index: number;
-  onRemoveClick: (category: "appetizers" | "pasta" | "dessert", index: number) => void;
+  id: number;
+  onChange: (id: number, field: string, value: string | number) => void;
+  onRemoveClick: (id: number) => void;
   price: number;
   title: string;
 }
 
 const MenuItemCard = (props: MenuItemCardProps) => {
-  const { category, description, image, index, onRemoveClick, price, title } = props;
+  const { description, image, id, onChange, onRemoveClick, price, title } = props;
 
   return (
     <div className='menu-item-card'>
-      <img alt={title} className='menu-item-card__image' src={require("../../assets/images/" + image)} />
+      <img alt={title} className='menu-item-card__image' src={image} />
       <div className='menu-item-card__left-container'>
-        <h1 className='menu-item-card__title'>{title}</h1>
-        <p className='menu-item-card__description gray'>{description}</p>
-        <button className='menu-item-card__remove-button' onClick={() => onRemoveClick( category, index)} type="button">Remove</button>
+        <InlineEdit
+          field="title"
+          id={id}
+          inputType="text"
+          onChange={onChange}
+          value={title}
+        />
+        <InlineEdit
+          field="description"
+          id={id}
+          inputType="textarea"
+          onChange={onChange}
+          value={description}
+        />
+        <button className='menu-item-card__remove-button' onClick={() => onRemoveClick(id)} type="button">Remove</button>
       </div>
       <div className='menu-item-card__right-container'>
-        <p className='menu-item-card__description bold'>${price}</p>
+        <div className='menu-item-card__price'>$</div>
+        <InlineEdit
+          field="price"
+          id={id}
+          inputType="number"
+          onChange={onChange}
+          value={price}
+        />
       </div>
     </div>
   )
