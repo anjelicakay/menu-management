@@ -56,8 +56,14 @@ const Menu = () => {
   }
 
   return (
-    <div className='menu'>
-      <button className='menu__add-button' type='button' onClick={handleOnAddNewClick}>Add New Item</button>
+    <div className='menu' data-testid="manage-menu">
+      <button
+        className='menu__add-button'
+        data-testid='add-item-button'
+        onClick={handleOnAddNewClick}
+        type='button'>
+          Add New Item
+      </button>
       <MenuSection
         category="appetizers"
         menu={menuItems.appetizers}

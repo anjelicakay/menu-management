@@ -2,7 +2,7 @@ import React from 'react';
 
 import '../../themes/common/MenuItemCard.scss';
 
-interface MenuItemCardProps {
+export interface MenuItemCardProps {
   category: "appetizers" | "pasta" | "dessert";
   description: string;
   image: string;
