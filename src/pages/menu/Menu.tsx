@@ -1,23 +1,21 @@
 import React, { useState } from 'react';
 
 import '../../themes/menu/Menu.scss';
-import { items, menuItem, menuItemsProps } from '../../utils/constants';
+import { items, menuItem } from '../../utils/constants';
 import MenuSection from '../common/MenuSection';
 import Modal from '../common/Modal';
 import AddMenuItemForm from './AddMenuItemForm';
 import RemoveConfirmation from './RemoveConfirmation';
 
-const emptyMenuItemsState = {
-  appetizers: [],
-  pasta: [],
-  dessert: []
-}
-
 const Menu = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
   const [isRemoveModalOpen, setIsRemoveModalOpen] = useState<boolean>(false);
-  const [menuItems, setMenuItems] = useState<menuItemsProps>(items);
-  const [filteredMenuItems, setFilteredMenuItems] = useState<menuItemsProps>(emptyMenuItemsState);
+  const [menuItems, setMenuItems] = useState<menuItem[]>(items);
+  const [filteredMenuItems, setFilteredMenuItems] = useState<menuItem[]>([]);
+
+  const appetizers = menuItems.filter((item) => item.category === "appetizer");
+  const pastas = menuItems.filter((item) => item.category === "pasta");
+  const desserts = menuItems.filter((item) => item.category === "dessert");
 
   const handleOnAddNewClick = () => {
     setIsAddModalOpen(true);
@@ -27,21 +25,16 @@ const Menu = () => {
     setIsAddModalOpen(false);
   };
 
-  const addMenuItem = (category: "appetizers" | "pasta" | "dessert", item: menuItem) => {
-    item.image = "bruschetta.jpeg"; // having issues with google images - setting default value for now
-  
-    setMenuItems({
-      ...menuItems,
-      [category]: [...menuItems[category], item],
-    });
+  const addMenuItem = (item: menuItem) => {  
+    setMenuItems([...menuItems, item]);
 
-    handleOnCloseClick()
+    handleOnCloseClick();
   }
 
-  const handleOnRemoveClick = (category: "appetizers" | "pasta" | "dessert", index: number) => {
-    const item = menuItems[category][index];
-    const filteredItems = menuItems[category].filter(menuItem => menuItem !== item);
-    setFilteredMenuItems({...menuItems, [category]: filteredItems});
+  const handleOnRemoveClick = (id: number) => {
+    const item = menuItems.find((item) => item.id === id);
+    const filteredItems = menuItems.filter(menuItem => menuItem !== item);
+    setFilteredMenuItems(filteredItems);
     setIsRemoveModalOpen(true);
   }
 
@@ -50,8 +43,19 @@ const Menu = () => {
     setIsRemoveModalOpen(false);
   }
 
+  const handleEditMenuItem = (id: number, field: string, value: string | number) => {
+    const editedMenuItems: menuItem[] = menuItems.map(item => {
+      if (item.id === id) {
+        return {...item, [field]: value}
+      }
+      return {...item}
+    })
+
+    return setMenuItems(editedMenuItems);
+  }
+
   const handleCancelClick = () => {
-    setFilteredMenuItems(emptyMenuItemsState);
+    setFilteredMenuItems([]);
     setIsRemoveModalOpen(false);
   }
 
@@ -66,17 +70,20 @@ const Menu = () => {
       </button>
       <MenuSection
         category="appetizers"
-        menu={menuItems.appetizers}
+        menu={appetizers}
+        onChange={handleEditMenuItem}
         onRemoveClick={handleOnRemoveClick}
       />
       <MenuSection
         category='pasta'
-        menu={menuItems.pasta}
+        menu={pastas}
+        onChange={handleEditMenuItem}
         onRemoveClick={handleOnRemoveClick}
       />
       <MenuSection
         category='dessert'
-        menu={menuItems.dessert}
+        menu={desserts}
+        onChange={handleEditMenuItem}
         onRemoveClick={handleOnRemoveClick}
       />
 
