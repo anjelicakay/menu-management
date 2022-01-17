@@ -19,20 +19,4 @@
     outline: none;
     padding: 3px;
   }
-
-  &__header {
-    @include header-reg;
-  }
-
-  &__description {
-    @include body-reg;
-
-    &.gray {
-      color: $slate-gray;
-    }
-
-    &.bold {
-      font-weight: 700;
-    }
-  }
 }

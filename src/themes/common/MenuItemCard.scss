@@ -26,6 +26,18 @@
       padding-right: 20px;
     }
   }
+  
+  &__description {
+    textarea {
+      @include body-reg;
+    }
+
+    &.gray {
+      textarea {
+        color: $slate-gray;
+      }
+    }
+  }
 
   &__button-container {
     display: flex;
@@ -67,6 +79,12 @@
       width: 50px;
     }
   }
+
+  &__title {
+    input {
+      @include header-reg;
+    }
+  }
   
   &__image {
     height: 100%;
@@ -78,8 +96,23 @@
     }
   }
 
+  img:hover {
+    cursor: pointer;
+  }
+
+  &__image-input {
+    input {
+      @include body-reg;
+    }
+  }
+
   &__price {
     @include body-reg;
     font-weight: 700;
+
+    input {
+      @include body-reg;
+      font-weight: 700;
+    }
   }
 }

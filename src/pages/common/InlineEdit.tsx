@@ -2,7 +2,7 @@ import React from 'react';
 
 import '../../themes/common/InlineEdit.scss';
 
-interface InlineEditProps {
+export interface InlineEditProps {
   field: string;
   id: number;
   inputType: "text" | "textarea" | "number";
@@ -23,7 +23,6 @@ const InlineEdit = (props: InlineEditProps) => {
     if (inputType === "text") {
       return (
         <input
-          className='inline-edit__header'
           onChange={(e: any) => onChange(id, field, e.target.value)}
           onKeyDown={onKeyDown}
           type="text"
@@ -33,7 +32,6 @@ const InlineEdit = (props: InlineEditProps) => {
     } else if (inputType === "textarea") {
       return (
         <textarea
-          className='inline-edit__description gray'
           onChange={(e: any) => onChange(id, field, e.target.value)}
           onKeyDown={onKeyDown}
           value={value}
@@ -42,7 +40,6 @@ const InlineEdit = (props: InlineEditProps) => {
     } else if (inputType === "number") {
       return (
         <input
-          className='inline-edit__description bold'
           onChange={(e: any) => onChange(id, field, e.target.value)}
           onKeyDown={onKeyDown}
           type="number"
