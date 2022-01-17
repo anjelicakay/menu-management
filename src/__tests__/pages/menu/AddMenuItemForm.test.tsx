@@ -30,7 +30,6 @@ describe("AddMenuItemForm", () => {
   
     await waitFor(() =>
       expect(defaultProps.onSubmit).toHaveBeenCalledWith(
-        "pasta", 
         {
           category: "pasta",
           description: "New description",

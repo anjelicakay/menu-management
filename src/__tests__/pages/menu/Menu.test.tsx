@@ -1,4 +1,5 @@
 import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Menu from "../../../pages/menu/Menu";
 
 describe("Menu", () => {
@@ -17,5 +18,12 @@ describe("Menu", () => {
       expect(screen.getByTestId("add-new-item-form")).toBeInTheDocument()
     })
   })
+
+  test("Menu items are edited", () => {
+    render(<Menu />)
+    const input = screen.getAllByRole("textbox");
+    userEvent.type(input[0], "!")
+    expect(screen.getByDisplayValue("Fresh Tomato Bruschetta!")).toBeInTheDocument()
+  }) 
 
 })

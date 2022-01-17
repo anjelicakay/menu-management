@@ -4,10 +4,10 @@ import MenuItemCard, { MenuItemCardProps } from "../../../pages/common/MenuItemC
 describe("MenuItemCard", () => {
 
   const defaultProps: MenuItemCardProps = {
-    category: "appetizers",
     description: "Test description",
     image: "bruschetta.jpeg",
-    index: 0,
+    id: 1,
+    onChange: jest.fn(),
     onRemoveClick: jest.fn(),
     price: 10.00,
     title: "Test appetizer",
@@ -15,8 +15,8 @@ describe("MenuItemCard", () => {
 
   test("Menu item card renders", () => {
     render(<MenuItemCard {...defaultProps} />)
-    expect(screen.getByText(defaultProps.title)).toBeInTheDocument()
-    expect(screen.getByText(defaultProps.description)).toBeInTheDocument()
+    expect(screen.getByDisplayValue(defaultProps.title)).toBeInTheDocument()
+    expect(screen.getByDisplayValue(defaultProps.description)).toBeInTheDocument()
     expect(screen.getByRole("button")).toBeInTheDocument()
   })
 
