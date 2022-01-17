@@ -5,7 +5,7 @@ import '../../themes/menu/AddMenuItemForm.scss';
 import { menuItem } from '../../utils/constants';
 
 export interface AddMenuItemFormProps {
-  onSubmit: (category: "appetizers" | "pasta" | "dessert", values: menuItem) => void;
+  onSubmit: (values: menuItem) => void;
 }
 
 const AddMenuItemForm = (props: AddMenuItemFormProps) => {
@@ -20,8 +20,7 @@ const AddMenuItemForm = (props: AddMenuItemFormProps) => {
   };
 
   const handleOnSubmit = (values: any) => {
-    const { category } = values;
-    onSubmit(category, values)
+    onSubmit(values)
   }
 
   return (

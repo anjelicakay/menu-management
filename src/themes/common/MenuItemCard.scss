@@ -28,15 +28,20 @@
   }
   
   &__description {
-    @include body-reg;
+    textarea {
+      @include body-reg;
+    }
 
     &.gray {
-      color: $slate-gray;
+      textarea {
+        color: $slate-gray;
+      }
     }
+  }
 
-    &.bold {
-      font-weight: 700;
-    }
+  &__button-container {
+    display: flex;
+    margin-top: 10px;
   }
 
   &__remove-button {
@@ -48,12 +53,26 @@
     cursor: pointer;
     display: flex;
     height: 20px;
-    margin-top: 10px;
+    margin-right: 10px;
+    padding: 0;
+    width: 43px;
+  }
+
+  &__edit-button {
+    @include body-reg;  
+    border: none;
+    border-radius: 5px;
+    background: transparent;
+    color: $slate-gray;
+    cursor: pointer;
+    display: flex;
+    height: 20px;
     padding: 0;
     width: 43px;
   }
 
   &__right-container {
+    display: flex;
     width: 30px;
 
     @media only screen and (min-width: $desktop) {
@@ -62,15 +81,38 @@
   }
 
   &__title {
-    @include header-reg;
+    input {
+      @include header-reg;
+    }
   }
   
   &__image {
     height: 100%;
+    object-fit: cover;
     width: 100px;
 
     @media only screen and (min-width: $desktop) {
       width: 125px;
+    }
+  }
+
+  img:hover {
+    cursor: pointer;
+  }
+
+  &__image-input {
+    input {
+      @include body-reg;
+    }
+  }
+
+  &__price {
+    @include body-reg;
+    font-weight: 700;
+
+    input {
+      @include body-reg;
+      font-weight: 700;
     }
   }
 }

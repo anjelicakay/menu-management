@@ -7,11 +7,12 @@ import MenuItemCard from './MenuItemCard';
 export interface MenuSectionProps {
   category: "appetizers" | "pasta" | "dessert";
   menu: menuItem[];
-  onRemoveClick: (category: "appetizers" | "pasta" | "dessert", index: number) => void;
+  onChange: (index: number, field: string, value: string | number) => void;
+  onRemoveClick: (id: number) => void;
 }
 
 const MenuSection = (props: MenuSectionProps) => {
-  const { category, menu, onRemoveClick } = props;
+  const { category, menu, onChange, onRemoveClick } = props;
 
   return (
     <div className='menu-section'>
@@ -20,10 +21,10 @@ const MenuSection = (props: MenuSectionProps) => {
         return (
           <div className='menu-section__card-container' key={index}>
             <MenuItemCard
-              category={category}
               description={item.description}
               image={item.image}
-              index={index}
+              id={item.id}
+              onChange={onChange}
               onRemoveClick={onRemoveClick}
               price={item.price}
               title={item.title}

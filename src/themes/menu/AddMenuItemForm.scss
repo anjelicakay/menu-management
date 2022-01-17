@@ -23,11 +23,13 @@
   &__field {
     @include body-reg;
     margin-bottom: 10px;
+    outline: none;
   }
 
   &__file-upload {
     @include body-reg;
     margin-bottom: 10px;
+    outline: none;
   }
 
   &__button-container {
