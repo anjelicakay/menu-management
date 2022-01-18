@@ -1,40 +1,53 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 
-import '../../themes/menu/Menu.scss';
-import { items, menuItem } from '../../utils/constants';
-import MenuSection from '../common/MenuSection';
-import Modal from '../common/Modal';
 import AddMenuItemForm from './AddMenuItemForm';
 import RemoveConfirmation from './RemoveConfirmation';
+import MenuSection from '../common/MenuSection';
+import Modal from '../common/Modal';
+import '../../themes/menu/Menu.scss';
+import { getRestaurantMenus, updateActiveMenu } from '../../store/restaurant/actionCreator';
+import { Menu, MenuItem } from '../../store/restaurant/types';
+import { RootState } from '../../store/RootState';
+import { exampleRestaurant } from '../../store/restaurant/constants';
 
-const Menu = () => {
+export interface MenusProps {
+  activeMenu: Menu;
+  getRestaurantMenus: () => void;
+  menus: Menu[];
+  updateActiveMenu: (menu: Menu) => void;
+}
+
+const Menus = (props: MenusProps) => {
+  const { activeMenu, getRestaurantMenus, menus, updateActiveMenu } = props;
+
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
   const [isRemoveModalOpen, setIsRemoveModalOpen] = useState<boolean>(false);
-  const [menuItems, setMenuItems] = useState<menuItem[]>(items);
-  const [filteredMenuItems, setFilteredMenuItems] = useState<menuItem[]>([]);
+  const [filteredMenuItems, setFilteredMenuItems] = useState<MenuItem[]>([]);
 
-  const appetizers = menuItems.filter((item) => item.category === "appetizer");
-  const pastas = menuItems.filter((item) => item.category === "pasta");
-  const desserts = menuItems.filter((item) => item.category === "dessert");
+  const handleMenuClick = (type: string) => {
+    const selectedMenu = menus.find((menu) => menu.type === type) || exampleRestaurant[0];
+    updateActiveMenu(selectedMenu);
+  };
 
-  const handleOnAddNewClick = () => {
+  const handleAddNewClick = () => {
     setIsAddModalOpen(true);
   };
 
-  const handleOnCloseClick = () => {
+  const handleCloseAddModalClick = () => {
     setIsAddModalOpen(false);
   };
 
-  const addMenuItem = (item: menuItem) => {
-    const id = menuItems.length + 1;
-    const newItem = {...item, id: id};
-    console.log(newItem)
-    setMenuItems([...menuItems, newItem]);
-
-    handleOnCloseClick();
+  const addMenuItem = (item: MenuItem) => {
+    const id = exampleRestaurant[0].menuItems.length + exampleRestaurant[1].menuItems.length + 1; // manually set id
+    const newItem: MenuItem = {...item, id: id};
+    const menu = {...activeMenu, menuItems: [...activeMenu.menuItems, newItem]}
+    updateActiveMenu(menu)
+    handleCloseAddModalClick();
   }
 
-  const handleOnRemoveClick = (id: number) => {
+  const handleRemoveClick = (id: number) => {
+    const menuItems = activeMenu.menuItems;
     const item = menuItems.find((item) => item.id === id);
     const filteredItems = menuItems.filter(menuItem => menuItem !== item);
     setFilteredMenuItems(filteredItems);
@@ -42,19 +55,9 @@ const Menu = () => {
   }
 
   const removeMenuItem = () => {
-    setMenuItems(filteredMenuItems);
+    const menu = {...activeMenu, menuItems: filteredMenuItems}
+    updateActiveMenu(menu)
     setIsRemoveModalOpen(false);
-  }
-
-  const handleEditMenuItem = (id: number, field: string, value: string | number) => {
-    const editedMenuItems: menuItem[] = menuItems.map(item => {
-      if (item.id === id) {
-        return {...item, [field]: value}
-      }
-      return {...item}
-    })
-
-    return setMenuItems(editedMenuItems);
   }
 
   const handleCancelClick = () => {
@@ -62,37 +65,61 @@ const Menu = () => {
     setIsRemoveModalOpen(false);
   }
 
+  const handleEditMenuItem = (id: number, field: string, value: string | number) => {
+    const menuItems = activeMenu.menuItems;
+    const editedMenuItems: MenuItem[] = menuItems.map(item => {
+      if (item.id === id) {
+        return {...item, [field]: value}
+      }
+      return {...item}
+    })
+
+    const menu = {...activeMenu, menuItems: editedMenuItems}
+
+    updateActiveMenu(menu)
+  }
+
+  useEffect(() => {
+    getRestaurantMenus()
+  }, [])
+
   return (
     <div className='menu' data-testid="manage-menu">
-      <button
-        className='menu__add-button'
-        data-testid='add-item-button'
-        onClick={handleOnAddNewClick}
-        type='button'>
-          Add New Item
-      </button>
-      <MenuSection
-        category="appetizers"
-        menu={appetizers}
-        onChange={handleEditMenuItem}
-        onRemoveClick={handleOnRemoveClick}
-      />
-      <MenuSection
-        category='pasta'
-        menu={pastas}
-        onChange={handleEditMenuItem}
-        onRemoveClick={handleOnRemoveClick}
-      />
-      <MenuSection
-        category='dessert'
-        menu={desserts}
-        onChange={handleEditMenuItem}
-        onRemoveClick={handleOnRemoveClick}
-      />
+      <div>
+        <button
+          className='menu__add-button'
+          data-testid='add-item-button'
+          onClick={handleAddNewClick}
+          type='button'>
+            Add New Item
+        </button>
+        {menus.map((menu) => {
+          return (
+            <button
+              className='menu__add-button'
+              data-testid='add-item-button'
+              onClick={() => handleMenuClick(menu.type)}
+              type='button'>
+                {menu.type}
+            </button>
+          )
+        })}
+      </div>
+      {activeMenu.categories.map((category) => {
+        const categoryItems = activeMenu.menuItems.filter((item) => item.category === category);
+        return (
+          <MenuSection
+            category={category}
+            menu={categoryItems}
+            onChange={handleEditMenuItem}
+            onRemoveClick={handleRemoveClick}
+          />
+        )
+      })}
 
       {isAddModalOpen &&
-        <Modal onClose={handleOnCloseClick}>
-          <AddMenuItemForm onSubmit={addMenuItem} />
+        <Modal onClose={handleCloseAddModalClick}>
+          <AddMenuItemForm menu={activeMenu} onSubmit={addMenuItem} />
         </Modal>
       }
       {isRemoveModalOpen &&
@@ -107,4 +134,14 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+const mapStateToProps = (state: RootState) => ({
+  activeMenu: state.RestaurantState.activeMenu,
+  menus: state.RestaurantState.menus
+})
+
+const mapDispatchToProps = (dispatch: any) => ({
+  getRestaurantMenus: () => dispatch(getRestaurantMenus()),
+  updateActiveMenu: (menu: Menu) => dispatch(updateActiveMenu(menu))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Menus);
