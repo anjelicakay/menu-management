@@ -1,15 +1,17 @@
 import React from 'react';
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
 
+import store from './store'
 import './App.css';
-import Menu from './pages/menu/Menu';
+import Menus from './pages/menu/Menu';
 
-
-function App() {
-  return (
+const rootElement = document.getElementById('root')
+ReactDOM.render(
+  <Provider store={store}>
     <div className="App">
-      <Menu />
+      <Menus />
     </div>
-  );
-}
-
-export default App;
+  </Provider>,
+  rootElement
+)

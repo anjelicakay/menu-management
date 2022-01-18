@@ -5,7 +5,7 @@ import { menuItem } from '../../utils/constants';
 import MenuItemCard from './MenuItemCard';
 
 export interface MenuSectionProps {
-  category: "appetizers" | "pasta" | "dessert";
+  category: string;
   menu: menuItem[];
   onChange: (index: number, field: string, value: string | number) => void;
   onRemoveClick: (id: number) => void;

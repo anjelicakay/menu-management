@@ -2,14 +2,15 @@ import React from 'react';
 import { Field, Form, Formik } from 'formik';
 
 import '../../themes/menu/AddMenuItemForm.scss';
-import { menuItem } from '../../utils/constants';
+import { menu, menuItem } from '../../utils/constants';
 
 export interface AddMenuItemFormProps {
+  menu: menu;
   onSubmit: (values: menuItem) => void;
 }
 
 const AddMenuItemForm = (props: AddMenuItemFormProps) => {
-  const { onSubmit } = props;
+  const { menu, onSubmit } = props;
 
   const initialValues = {
     category: "",
@@ -39,10 +40,12 @@ const AddMenuItemForm = (props: AddMenuItemFormProps) => {
               data-testid="item-input-category"
               name="category"
             >
-              <option value=""></option>
-              <option value="appetizers">Appetizer</option>
-              <option value="pasta">Pasta</option>
-              <option value="dessert">Dessert</option>
+              <option disabled selected value="">Select your category</option>
+              {menu.categories.map((category) => {
+                return (
+                  <option value={category}>{category}</option>
+                )
+              })}
             </Field>
           </div>
           <div className='add-menu-item-form__container'>
