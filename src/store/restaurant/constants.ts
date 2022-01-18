@@ -1,13 +1,37 @@
-export interface menuItem {
-  category: string;
-  description: string;
-  id: number;
-  image: string;
-  price: number;
-  title: string;
+import { Menu, MenuItem } from "./types";
+
+export const GET_RESTAURANT_MENUS = 'GET_RESTAURANT_MENUS';
+export const GET_RESTAURANT_MENUS_SUCCESS = 'GET_RESTAURANT_MENUS_SUCCESS';
+
+export const UPDATE_ACTIVE_MENU = 'UPDATE_ACTIVE_MENU';
+
+interface GetRestaurantMenusAction {
+  type: typeof GET_RESTAURANT_MENUS
 }
 
-export const items: menuItem[] = [
+interface GetRestaurantMenusSuccessAction {
+  type: typeof GET_RESTAURANT_MENUS_SUCCESS,
+  payload: {
+    activeMenu: Menu,
+    menus: Menu[]
+  }
+}
+
+interface UpdateActiveMenuAction {
+  type: typeof UPDATE_ACTIVE_MENU,
+  payload: Menu
+}
+
+export type RestaurantActionTypes = 
+  GetRestaurantMenusAction |
+  GetRestaurantMenusSuccessAction |
+  UpdateActiveMenuAction;
+
+
+
+
+
+export const dinnerMenuItems: MenuItem[] = [
   {
     category: "appetizer",
     description: "on grilled garlic crostini",
@@ -105,3 +129,61 @@ export const items: menuItem[] = [
     title: "The Cookie Jar"
   },
 ];
+
+export const lunchMenuItems: MenuItem[] = [
+  {
+    category: "salad",
+    description: "romaine, parmesan, garlic breadcrumbs",
+    id: 13,
+    image: "https://natashaskitchen.com/wp-content/uploads/2019/01/Caesar-Salad-Recipe-3.jpg",
+    price: 9.00,
+    title: "Caesar"
+  },
+  {
+    category: "salad",
+    description: "salami, pepperoncini, blue cheese, egg, cherry tomatoes, artichokes, red onion, cucumber, avocado, parmesan breadcrumbs, smoked mustard vinaigrette",
+    id: 14,
+    image: "https://www.chelseasmessyapron.com/wp-content/uploads/2017/02/Italian-Chopped-Salad-2-500x500.jpg",
+    price: 17.00,
+    title: "Chopped"
+  },
+  {
+    category: "sandwich",
+    description: "creamy coleslaw, spicy aioli, buttered pickles, sesame bun",
+    id: 15,
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQih7SSaJ0DEj_x3zxkGpN1RpC2-nvO-rUsvQ&usqp=CAU",
+    price: 12.00,
+    title: "Spicy Chicken"
+  },
+  {
+    category: "sandwich",
+    description: "mustard greens, tomato, green goddess, brioche",
+    id: 16,
+    image: "https://howtofeedaloon.com/wp-content/uploads/2018/07/lobster-roll-instagram.jpg",
+    price: 15.00,
+    title: "Lobster Roll"
+  },
+  {
+    category: "sandwich",
+    description: "marinated bufala mozzarella, sliced tomato, arugula, shaved red onion, herb mayo, brioche bun",
+    id: 17,
+    image: "https://v1.nitrocdn.com/iRwsMXPEdaMSNBlSqLBkXmjSJwoqRrps/assets/static/optimized/rev-f3f118f/wp-content/uploads/2021/09/Close-up-side-shot-of-styled-sandwich-2.jpg",
+    price: 15.00,
+    title: "Grilled Chicken"
+  },
+]
+
+export const lunch: Menu = {
+  categories: ["salad", "sandwich"],
+  menuItems: lunchMenuItems,
+  type: "lunch"
+}
+
+export const dinner: Menu = {
+  categories: ["appetizer", "pasta", "dessert"],
+  menuItems: dinnerMenuItems,
+  type: "dinner"
+}
+
+export const exampleRestaurant = [lunch, dinner]
+
