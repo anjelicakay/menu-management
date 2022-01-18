@@ -18,7 +18,7 @@ export interface MenusProps {
   updateActiveMenu: (menu: Menu) => void;
 }
 
-const Menus = (props: MenusProps) => {
+export const Menus = (props: MenusProps) => {
   const { activeMenu, getRestaurantMenus, menus, updateActiveMenu } = props;
 
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);

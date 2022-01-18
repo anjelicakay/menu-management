@@ -1,12 +1,12 @@
 import React from 'react';
 
-import '../../themes/common/MenuSection.scss';
-import { menuItem } from '../../utils/constants';
 import MenuItemCard from './MenuItemCard';
+import '../../themes/common/MenuSection.scss';
+import { MenuItem } from '../../store/restaurant/types';
 
 export interface MenuSectionProps {
   category: string;
-  menu: menuItem[];
+  menu: MenuItem[];
   onChange: (index: number, field: string, value: string | number) => void;
   onRemoveClick: (id: number) => void;
 }
@@ -17,7 +17,7 @@ const MenuSection = (props: MenuSectionProps) => {
   return (
     <div className='menu-section'>
       <h1 className='menu-section__header'>{category}</h1>
-      {menu.map((item: menuItem, index) => {
+      {menu.map((item: MenuItem, index) => {
         return (
           <div className='menu-section__card-container' key={index}>
             <MenuItemCard

@@ -5,6 +5,11 @@ import AddMenuItemForm, { AddMenuItemFormProps } from "../../../pages/menu/AddMe
 describe("AddMenuItemForm", () => {
 
   const defaultProps: AddMenuItemFormProps = {
+    menu: {
+      categories: ["pasta", "salad"],
+      menuItems: [],
+      type: "lunch"
+    },
     onSubmit: jest.fn()
   }
 

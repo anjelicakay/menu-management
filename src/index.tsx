@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 
 import store from './store'
 import './App.css';
-import Menus from './pages/menu/Menu';
+import Menus from './pages/menu/Menus';
 
 const rootElement = document.getElementById('root')
 ReactDOM.render(

@@ -2,11 +2,10 @@ import React from 'react';
 import { Field, Form, Formik } from 'formik';
 
 import '../../themes/menu/AddMenuItemForm.scss';
-import { menu, menuItem } from '../../utils/constants';
-
+import { Menu, MenuItem } from '../../store/restaurant/types';
 export interface AddMenuItemFormProps {
-  menu: menu;
-  onSubmit: (values: menuItem) => void;
+  menu: Menu;
+  onSubmit: (values: MenuItem) => void;
 }
 
 const AddMenuItemForm = (props: AddMenuItemFormProps) => {
